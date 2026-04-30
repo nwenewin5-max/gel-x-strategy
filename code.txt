@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gel-X Strategic Intelligence 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    
+    <!-- Chosen Palette: Pastel Dream (Background: #F0F9FF, Cards: #FFF1F2, Accents: #F5F3FF, Text: #334155) -->
+    <!-- Application Structure Plan: 
+         1. Hero: Strategic 2026 Vision.
+         2. Pillars: Bio-Safety & Tech mandates.
+         3. Global Analysis: Deep dive into Japan, South Korea, and USA markets.
+         4. Trend Forecast 2025-2026: Lookbook for future aesthetics.
+         5. Roadmap: Operational Kanban for launch.
+         6. Analytics: Resource distribution.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <style>
+        :root {
+            --bg-pastel-blue: #F0F9FF;
+            --card-pink: #FFF1F2;
+            --accent-lavender: #F5F3FF;
+            --text-main: #334155;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-pastel-blue);
+            color: var(--text-main);
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, .serif-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.03);
+            transition: all 0.4s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-pill {
+            transition: all 0.3s ease;
+        }
+        .nav-pill:hover {
+            background-color: white;
+            color: #EC4899;
+        }
+
+        .kanban-column {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2rem;
+            padding: 1.5rem;
+            min-width: 280px;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            margin: auto;
+            height: 350px;
+        }
+
+        .modal-overlay {
+            background-color: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s ease;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .trend-tag {
+            background: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #64748b;
+            border: 1px solid #f1f5f9;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-6xl z-50">
+        <div class="glass-card rounded-full px-6 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center font-bold text-pink-500 serif-font italic text-xl">Gx</div>
+                <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400 hidden sm:block">Vision 2026</span>
+            </div>
+            <div class="hidden md:flex space-x-2">
+                <button onclick="scrollToSection('global')" class="nav-pill px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest">Global</button>
+                <button onclick="scrollToSection('trends')" class="nav-pill px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest">Trends</button>
+                <button onclick="scrollToSection('kanban')" class="nav-pill px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest">Roadmap</button>
+                <button onclick="scrollToSection('resources')" class="nav-pill px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest">Budget</button>
+            </div>
+            <div class="w-10 h-10"></div> <!-- Spacer -->
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="pt-48 pb-32 px-6 max-w-7xl mx-auto text-center relative overflow-hidden">
+        <div class="absolute top-20 left-10 w-48 h-48 bg-pink-200/20 rounded-full blur-3xl floating"></div>
+        <div class="absolute bottom-10 right-20 w-64 h-64 bg-blue-200/20 rounded-full blur-3xl floating" style="animation-delay: -2s"></div>
+        
+        <div class="relative z-10">
+            <span class="text-pink-400 text-[10px] font-bold uppercase tracking-[0.5em] mb-6 block">Industry Intelligence Report</span>
+            <h1 class="text-6xl md:text-8xl font-bold leading-tight mb-8 text-slate-800">
+                The Luminous <br><span class="italic serif-font text-pink-400">2026 Strategy</span>
+            </h1>
+            <p class="text-slate-400 text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed">
+                Navigating the global transition to biocompatible Soft Gel systems in the $19.4B beauty economy.
+            </p>
+            
+            <div class="mt-16 flex flex-wrap justify-center gap-6">
+                <div class="glass-card px-8 py-5 rounded-[2rem] border-pink-100/50">
+                    <div class="text-[9px] font-black text-pink-400 uppercase tracking-widest mb-1">Safety Goal</div>
+                    <div class="text-2xl font-bold text-slate-700">0.0% HEMA</div>
+                </div>
+                <div class="glass-card px-8 py-5 rounded-[2rem] border-blue-100/50">
+                    <div class="text-[9px] font-black text-blue-400 uppercase tracking-widest mb-1">Growth Forecast</div>
+                    <div class="text-2xl font-bold text-slate-700">+7.9% CAGR</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Global Hubs -->
+        <section id="global" class="py-24 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-16 text-center">
+                    <h2 class="text-4xl font-bold text-slate-800 mb-4">Global Market Hubs</h2>
+                    <p class="text-slate-400 serif-font italic text-lg">Comparing innovation vectors in Japan, Korea, and the USA.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <!-- Japan -->
+                    <div class="glass-card p-10 rounded-[3rem] border-blue-100/30">
+                        <div class="flex items-center space-x-3 mb-6">
+                            <span class="text-xs font-bold text-blue-400 bg-blue-50 px-2 py-1 rounded">JP</span>
+                            <h3 class="font-bold text-slate-800">Japan: Bio-Health</h3>
+                        </div>
+                        <p class="text-sm text-slate-500 leading-relaxed">Focus on "Non-Sanding" adhesion that protects the natural nail's dorsal layer. Consumers prioritize physiological health over length.</p>
+                    </div>
+
+                    <!-- Korea -->
+                    <div class="glass-card p-10 rounded-[3rem] border-pink-100/30">
+                        <div class="flex items-center space-x-3 mb-6">
+                            <span class="text-xs font-bold text-pink-400 bg-pink-50 px-2 py-1 rounded">KR</span>
+                            <h3 class="font-bold text-slate-800">Korea: Visual Lab</h3>
+                        </div>
+                        <p class="text-sm text-slate-500 leading-relaxed">Pioneering textural innovations like syrup gels and aura gradients. Fast-paced trends driven by K-beauty digital marketing.</p>
+                    </div>
+
+                    <!-- USA -->
+                    <div class="glass-card p-10 rounded-[3rem] border-purple-100/30">
+                        <div class="flex items-center space-x-3 mb-6">
+                            <span class="text-xs font-bold text-purple-400 bg-purple-50 px-2 py-1 rounded">US</span>
+                            <h3 class="font-bold text-slate-800">USA: Extension Era</h3>
+                        </div>
+                        <p class="text-sm text-slate-500 leading-relaxed">Rapid shift toward pre-cured full coverage tips (Gel-X) and high-strength length. Significant growth in premium DIY omnichannel kits.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trend Forecast -->
+        <section id="trends" class="py-24 px-6 bg-gradient-to-b from-transparent to-white/30">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16">
+                    <span class="text-pink-400 text-[10px] font-bold uppercase tracking-[0.4em] mb-4 block">Aesthetic Lookbook</span>
+                    <h2 class="text-4xl md:text-5xl font-bold text-slate-800 mb-4">Forecast 2025-2026</h2>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="glass-card p-10 rounded-[3rem] bg-white/80">
+                        <h4 class="text-[10px] font-black text-blue-400 uppercase tracking-widest mb-6">Japan: Metallic Fluidity</h4>
+                        <div class="space-y-4">
+                            <div>
+                                <span class="trend-tag">Molten Silver</span>
+                                <p class="text-xs text-slate-400 mt-2">Liquid-metal accents that flow organically across sheer bases.</p>
+                            </div>
+                            <div>
+                                <span class="trend-tag">Glass French</span>
+                                <p class="text-xs text-slate-400 mt-2">Transparent extension tips with crystalline inner textures.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-10 rounded-[3rem] bg-white/80">
+                        <h4 class="text-[10px] font-black text-pink-400 uppercase tracking-widest mb-6">Korea: Dewdrop 3D</h4>
+                        <div class="space-y-4">
+                            <div>
+                                <span class="trend-tag">Syrup Aura</span>
+                                <p class="text-xs text-slate-400 mt-2">Sheer volume layers with radial blush-like color centers.</p>
+                            </div>
+                            <div>
+                                <span class="trend-tag">Velvet Cat-Eye</span>
+                                <p class="text-xs text-slate-400 mt-2">Magnetic particles creating fabric-like shimmer movement.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-10 rounded-[3rem] bg-white/80">
+                        <h4 class="text-[10px] font-black text-purple-400 uppercase tracking-widest mb-6">USA: Cyber-Organic</h4>
+                        <div class="space-y-4">
+                            <div>
+                                <span class="trend-tag">Lavender Chrome</span>
+                                <p class="text-xs text-slate-400 mt-2">Futuristic violet mirrored finishes on elongated extensions.</p>
+                            </div>
+                            <div>
+                                <span class="trend-tag">Moss Biophilic</span>
+                                <p class="text-xs text-slate-400 mt-2">Deep translucent greens mimicking nature-tech fusion.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kanban Roadmap -->
+        <section id="kanban" class="py-24 px-6">
+            <div class="max-w-[1400px] mx-auto">
+                <div class="flex flex-col md:flex-row items-end justify-between mb-12 gap-4">
+                    <div>
+                        <h2 class="text-4xl font-bold text-slate-800">Operational Roadmap</h2>
+                        <p class="text-pink-400 serif-font italic text-lg">Tracking 2026 deployment milestones.</p>
+                    </div>
+                    <div class="bg-white/50 px-5 py-2 rounded-full border border-slate-100">
+                        <select id="kanban-filter" class="bg-transparent text-[10px] font-bold uppercase tracking-widest outline-none cursor-pointer">
+                            <option value="all">Full Roadmap</option>
+                            <option value="high">Urgent 2026</option>
+                            <option value="medium">Strategic</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 overflow-x-auto pb-10 custom-scrollbar" id="kanban-board">
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources -->
+        <section id="resources" class="py-32 px-6">
+            <div class="max-w-6xl mx-auto glass-card rounded-[4rem] p-12 md:p-20 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-pink-200 via-blue-200 to-purple-200"></div>
+                
+                <div class="grid lg:grid-cols-2 items-center gap-16">
+                    <div>
+                        <h2 class="text-4xl font-bold mb-8 text-slate-800">Strategic Allocation</h2>
+                        <p class="text-slate-400 mb-10 text-lg font-light leading-relaxed">Budget is heavily weighted toward Molecular Science (45%) and Clinical Validation (25%) to ensure the "Zero-Risk" 2026 standard.</p>
+                        
+                        <div class="grid grid-cols-2 gap-8">
+                            <div>
+                                <div class="text-3xl font-bold text-pink-400">45%</div>
+                                <div class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">R&D Science</div>
+                            </div>
+                            <div>
+                                <div class="text-3xl font-bold text-blue-400">25%</div>
+                                <div class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Safety Audit</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center">
+                        <div class="chart-container">
+                            <canvas id="resourceChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-20 text-center border-t border-white">
+        <div class="serif-font italic text-3xl font-bold text-pink-300 mb-4">Gx</div>
+        <p class="text-[9px] font-bold uppercase tracking-[0.5em] text-slate-300">Biocompatible Future Intelligence • 2026</p>
+    </footer>
+
+    <!-- Modal -->
+    <div id="card-modal" class="modal-overlay">
+        <div class="bg-white rounded-[3rem] shadow-2xl max-w-lg w-full p-12 relative">
+            <button onclick="closeModal()" class="absolute top-10 right-10 text-slate-300 hover:text-pink-400 text-2xl">✕</button>
+            <h3 id="modal-title" class="text-3xl font-bold text-slate-800 mb-4 serif-font"></h3>
+            <div class="bg-blue-50/50 p-8 rounded-[2rem] border border-blue-100">
+                <p id="modal-desc" class="text-slate-500 text-sm leading-relaxed"></p>
+            </div>
+            <div class="mt-10 flex justify-center">
+                <button onclick="closeModal()" class="bg-slate-800 text-white px-10 py-4 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-pink-400 transition-colors">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const kanbanData = [
+            { id: 1, column: 'backlog', title: 'Global Regulatory Sync', desc: 'Synthesizing the unified 2026 safety standards across EU, US, and Asian markets.', priority: 'high' },
+            { id: 2, column: 'backlog', title: 'Zero-HEMA Sourcing', desc: 'Securing plant-derived acrylate alternatives for 2026 formulations.', priority: 'high' },
+            { id: 3, column: 'inprogress', title: 'AI-Photon Lab', desc: 'Developing smart-cure LED hardware that adjusts to gel thickness.', priority: 'high' },
+            { id: 4, column: 'inprogress', title: 'Omnichannel Kit', desc: 'Premium DIY system for US market launch.', priority: 'medium' },
+            { id: 5, column: 'testing', title: 'Bio-Stability Trials', desc: '48-month shelf-life validation for the 2026 bio-gel line.', priority: 'high' },
+            { id: 6, column: 'done', title: 'HEMA Zero Standard', desc: 'Successfully certified the first 0.0% HEMA-Free line for launch.', priority: 'none' }
+        ];
+
+        const columns = [
+            { id: 'backlog', title: 'Discovery' },
+            { id: 'inprogress', title: 'Engineering' },
+            { id: 'testing', title: 'Validation' },
+            { id: 'done', title: 'Launch' }
+        ];
+
+        function getPriorityColor(p) {
+            switch(p) {
+                case 'high': return '#FBCFE8'; 
+                case 'medium': return '#BAE6FD'; 
+                default: return '#F1F5F9';
+            }
+        }
+
+        function renderKanban(filter = 'all') {
+            const board = document.getElementById('kanban-board');
+            board.innerHTML = '';
+            columns.forEach(col => {
+                const colDiv = document.createElement('div');
+                colDiv.className = 'kanban-column flex flex-col space-y-6';
+                colDiv.innerHTML = `<h3 class="text-xl font-bold px-2">${col.title}</h3>`;
+                const container = document.createElement('div');
+                container.className = 'space-y-4';
+                const filtered = kanbanData.filter(i => i.column === col.id && (filter === 'all' || i.priority === filter));
+                filtered.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = `glass-card p-6 rounded-[2rem] cursor-pointer`;
+                    card.style.borderLeft = `8px solid ${getPriorityColor(item.priority)}`;
+                    card.onclick = () => openModal(item);
+                    card.innerHTML = `<h4 class="font-bold text-slate-700 text-sm">${item.title}</h4>`;
+                    container.appendChild(card);
+                });
+                colDiv.appendChild(container);
+                board.appendChild(colDiv);
+            });
+        }
+
+        function openModal(item) {
+            document.getElementById('modal-title').textContent = item.title;
+            document.getElementById('modal-desc').textContent = item.desc;
+            document.getElementById('card-modal').classList.add('active');
+        }
+        function closeModal() { document.getElementById('card-modal').classList.remove('active'); }
+
+        document.getElementById('kanban-filter').onchange = (e) => renderKanban(e.target.value);
+        function scrollToSection(id) { document.getElementById(id).scrollIntoView({ behavior: 'smooth' }); }
+
+        function initChart() {
+            const ctx = document.getElementById('resourceChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['R&D', 'Safety', 'Marketing', 'Logistics'],
+                    datasets: [{
+                        data: [45, 25, 20, 10],
+                        backgroundColor: ['#FBCFE8', '#BAE6FD', '#E9D5FF', '#F1F5F9'],
+                        borderWidth: 5,
+                        borderColor: '#ffffff',
+                        borderRadius: 15
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '75%',
+                    plugins: { legend: { position: 'bottom', labels: { padding: 20, usePointStyle: true, font: { weight: 'bold' } } } }
+                }
+            });
+        }
+
+        window.onload = () => { renderKanban(); initChart(); };
+    </script>
+</body>
+</html>
